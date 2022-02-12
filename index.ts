@@ -21,25 +21,59 @@ They include:
 - 3 cards at a time, unlimited times through the deck
 */
 
+class Game {
+    settings: GameSettings;
+    duration: number;
+}
+
 class GameSettings {
-    cardsPerDraw: number;
-    timesThroughDeck: number | "infinity";
+    cardsPerDraw: 1 | 3;
+    timesThroughDeck: 1 | 3 | "infinity";
 
     constructor(settings: {
-        cardsPerDraw: number;
-        timesThroughDeck: number | "infinity";
+        cardsPerDraw: 1 | 3;
+        timesThroughDeck: 1 | 3 | "infinity";
     }) {
         this.cardsPerDraw = settings.cardsPerDraw;
         this.timesThroughDeck = settings.timesThroughDeck;
     }
 }
 
-class Stock {
-    gameMode: GameSettings;
-    timesThroughDeck: number;
-    
-    draw() {
+enum Suit {
+    Spades,
+    Hearts,
+    Clubs,
+    Diamonds,
+}
 
+enum Rank {
+    Ace,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+}
+
+class Card {
+    suit: Suit;
+    rank: Rank;
+}
+
+class Stock {
+    gameSettings: GameSettings;
+    timesThroughDeck: number;
+    cards: Card;
+
+    draw() {
+		
     }
 }
 
@@ -48,11 +82,27 @@ class Waste {
 }
 
 class Tableau {
+    depots: [Depot, Depot, Depot, Depot, Depot, Depot, Depot];
 
+    constructor() {
+
+    }
 }
 
 class Foundation {
+    suit: Suit;
+    cards: Card[];
+    // foundation is a Stack, Last in First out
 
+    topOfStack() {
+        if (this.cards.length === 0) return null;
+        return this.cards[this.cards.length - 1];
+    }
+
+    push(card: Card) {
+        if (card.suit !== this.suit) return false;
+        if (card.rank !== this.topOfStack().)
+    }
 }
 
 class Depot {
